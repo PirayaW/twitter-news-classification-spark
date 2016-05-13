@@ -1,0 +1,20 @@
+(0) Political news
+- CNN Politics (@CNNPolitics)
+(1) Financial
+- Yahoo Finance (@YahooFinance)
+(2) Sports
+- Yahoo Sports (@YahooSports)
+Weather ---> excluded
+- The Weather Channel (@weatherchannel)
+(3) Science and Technology
+- TechCrunch (@TechCrunch)
+- Forbes Tech News (@ForbesTech) ---> excluded
+- Science News (@ScienceNews)
+(4) Entertainment
+- CNN Entertainment (@CNNent)
+- Yahoo Celebrity (@YahooCelebrity)
+- Yahoo Music (@YahooMusic)
+(5) Crime
+- HuffPost Crime (@HuffPostCrime)
+- Metro Detroit Crime (@CrimeInTheD)
+Others (e.g. lifestyle)
