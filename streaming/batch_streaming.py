@@ -10,7 +10,7 @@ else:
     import ConfigParser as configparser
 
 if __name__ == '__main__':
-    frequency = 10  # default frequency
+    frequency = 20  # default frequency
     if len(sys.argv) > 1:
         frequency = int(sys.argv[1])
 
@@ -40,6 +40,6 @@ if __name__ == '__main__':
             exit(0)
 
     for file in filenames:
-        shutil.copy2(path + file, dest + file)
+        shutil.copyfile(path + file, dest + file)
         print('Copied: ' + file)
         time.sleep(frequency)
