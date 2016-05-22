@@ -66,7 +66,8 @@ def parsePoint(line, index2word_set, model, num_features):
 
 def predictFunction(r, model_pol_fin, model_pol_sports, model_pol_tech, model_pol_ent, model_pol_crime,
                     model_fin_sports, model_fin_tech, model_fin_ent, model_fin_crime, model_sports_tech,
-                    model_sports_ent, model_sports_crime, model_tech_ent, model_tech_crime, model_ent_crime):
+                    model_sports_ent, model_sports_crime, model_tech_ent, model_tech_crime, model_ent_crime,
+                    labels):
     lab_count = np.zeros((6), dtype="int32")
     if model_pol_fin.predict(r[0].features) == 1:
         lab_count[0] += 1
@@ -129,11 +130,25 @@ def predictFunction(r, model_pol_fin, model_pol_sports, model_pol_tech, model_po
     else:
         lab_count[5] += 1
     print(lab_count)
+    correct = 0
     if np.sum(lab_count) == 0.0:
-        return LabeledPoint(r[0].label, r[0].features), r[1], -1, int(r[0].label)
+        #return LabeledPoint(r[0].label, r[0].features), r[1], -1, int(r[0].label)
+        return LabeledPoint(r[0].label, r[0].features), r[1], "Other", int(r[0].label), correct
     else:
-        return LabeledPoint(r[0].label, r[0].features), r[1], np.argmax(lab_count), int(r[0].label)
+        args = np.argwhere(lab_count == np.amax(lab_count))
+        argl = args.flatten().tolist()
+        pred_label = [labels[i] for i in argl]
+        if r[0].label in argl:
+            correct = 1
+        #return LabeledPoint(r[0].label, r[0].features), r[1], np.argmax(lab_count), int(r[0].label)
+        return LabeledPoint(r[0].label, r[0].features), r[1], pred_label, int(r[0].label), correct
 
+def calcAccuracy(rdd):
+    nrow = rdd.count()
+    print(nrow)
+    print("ACCURACY",rdd.filter(lambda x: x[4] == 1).count()/nrow)
+    #rdd.repartition(1)
+    #rdd.saveAsTextFiles("Output")
 
 if __name__ == '__main__':
     config = configparser.RawConfigParser()
@@ -281,8 +296,11 @@ if __name__ == '__main__':
                                                  model_sports_crime.latestModel(),
                                                  model_tech_ent.latestModel(),
                                                  model_tech_crime.latestModel(),
-                                                 model_ent_crime.latestModel()
+                                                 model_ent_crime.latestModel(),
+                                                 labels
                                                  ))
     output.pprint()
+    output.foreachRDD(calcAccuracy)
+    output.saveAsTextFiles("Output") #Or with path
     ssc.start()
     ssc.awaitTermination()
