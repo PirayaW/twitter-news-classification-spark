@@ -129,11 +129,13 @@ def predictFunction(r, model_pol_fin, model_pol_sports, model_pol_tech, model_po
         lab_count[4] += 1
     else:
         lab_count[5] += 1
-    print(lab_count)
+    # print(lab_count)
     correct = 0
-    if np.sum(lab_count) == 0.0:
+    actual_label = labels[int(r[0].label)]
+    if int(np.sum(lab_count)) == 0:
         #return LabeledPoint(r[0].label, r[0].features), r[1], -1, int(r[0].label)
-        return LabeledPoint(r[0].label, r[0].features), r[1], "Other", int(r[0].label), correct
+        # return LabeledPoint(r[0].label, r[0].features), r[1], "Other", int(r[0].label), correct
+        return correct, "Other", actual_label, r[0].features, r[1]
     else:
         args = np.argwhere(lab_count == np.amax(lab_count))
         argl = args.flatten().tolist()
@@ -141,14 +143,18 @@ def predictFunction(r, model_pol_fin, model_pol_sports, model_pol_tech, model_po
         if r[0].label in argl:
             correct = 1
         #return LabeledPoint(r[0].label, r[0].features), r[1], np.argmax(lab_count), int(r[0].label)
-        return LabeledPoint(r[0].label, r[0].features), r[1], pred_label, int(r[0].label), correct
+        # return LabeledPoint(r[0].label, r[0].features), r[1], pred_label, int(r[0].label), correct
+        return correct, pred_label, actual_label, r[0].features, r[1]
+
 
 def calcAccuracy(rdd):
     nrow = rdd.count()
     print(nrow)
-    print("ACCURACY",rdd.filter(lambda x: x[4] == 1).count()/nrow)
+    if nrow > 0:
+        print("ACCURACY", rdd.filter(lambda x: x[0] == 1).count()/float(nrow))
     #rdd.repartition(1)
     #rdd.saveAsTextFiles("Output")
+
 
 if __name__ == '__main__':
     config = configparser.RawConfigParser()
@@ -180,7 +186,7 @@ if __name__ == '__main__':
                   [3.0, 4.0], [3.0, 5.0],
                   [4.0, 5.0]]
     data = ssc.textFileStream("streaming_data/")  # SPECIFY THE TRAINING DATA DIRECTORY HERE
-    testData = ssc.textFileStream("streaming_data/")  # SPECIFY THE TESTING DATA DIRECTORY HERE
+    testData = ssc.textFileStream("streaming_test_data/")  # SPECIFY THE TESTING DATA DIRECTORY HERE
     data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
     testData = testData.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 
@@ -301,6 +307,6 @@ if __name__ == '__main__':
                                                  ))
     output.pprint()
     output.foreachRDD(calcAccuracy)
-    output.saveAsTextFiles("Output") #Or with path
+    output.saveAsTextFiles("Output/testData") #Or with path
     ssc.start()
     ssc.awaitTermination()

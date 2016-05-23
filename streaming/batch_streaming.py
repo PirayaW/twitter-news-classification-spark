@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 
-from Tools.scripts.treesync import raw_input
+# from Tools.scripts.treesync import raw_input
 from random import sample
 
 python_version = sys.version_info.major
@@ -49,12 +49,12 @@ if __name__ == '__main__':
             exit(0)
 
     tr_percent = 0.7
-    tr_numfiles = round(tr_percent*len(filenames))
-    tr_num  = sample(range(len(filenames)), tr_numfiles)
+    tr_numfiles = int(round(tr_percent*len(filenames)))
+    tr_num = sample(range(len(filenames)), tr_numfiles)
 
-    for i in range(0,len(filenames)):
+    for i in range(0, len(filenames)):
         file = filenames[i]
-        if i in tr_num or i == 0:
+        if (i in tr_num or i == 0) and i < len(filenames)-1:
             shutil.copyfile(path + file, dest + file)
             print('Copied Training file: ' + file)
             time.sleep(frequency)
