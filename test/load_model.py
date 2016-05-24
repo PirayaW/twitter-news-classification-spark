@@ -1,6 +1,5 @@
 import os
 import sys
-import cPickle
 import gzip
 import random
 
@@ -8,8 +7,10 @@ import random
 python_version = sys.version_info.major
 if python_version == 3:
     import configparser
+    import pickle as cPickle
 else:
     import ConfigParser as configparser
+    import cPickle
 
 
 if __name__ == '__main__':

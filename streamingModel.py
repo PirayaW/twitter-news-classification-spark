@@ -4,7 +4,6 @@ import sys
 import string
 import re
 import numpy as np
-import cPickle
 import gzip
 from gensim.models import Word2Vec
 
@@ -12,8 +11,10 @@ from gensim.models import Word2Vec
 python_version = sys.version_info.major
 if python_version == 3:
     import configparser
+    import pickle as cPickle
 else:
     import ConfigParser as configparser
+    import cPickle
 
 
 def Nlabels2(line, c):
