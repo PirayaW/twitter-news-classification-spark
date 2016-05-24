@@ -4,6 +4,8 @@ import sys
 import string
 import re
 import numpy as np
+import cPickle
+import gzip
 from gensim.models import Word2Vec
 
 
@@ -64,11 +66,38 @@ def parsePoint(line, index2word_set, model, num_features):
     return LabeledPoint(float(label), featureVec), text
 
 
+def saveModel(model, name):
+    f = gzip.open(name + '.pkl.gz', 'wb')
+    cPickle.dump(model, f)
+    f.close()
+
+
+def saveModels(r, model_pol_fin, model_pol_sports, model_pol_tech, model_pol_ent, model_pol_crime,
+                    model_fin_sports, model_fin_tech, model_fin_ent, model_fin_crime, model_sports_tech,
+                    model_sports_ent, model_sports_crime, model_tech_ent, model_tech_crime, model_ent_crime):
+    saveModel(model_pol_fin, "ClassificationModels/pol_fin")
+    saveModel(model_pol_sports, "ClassificationModels/pol_sports")
+    saveModel(model_pol_tech, "ClassificationModels/pol_tech")
+    saveModel(model_pol_ent, "ClassificationModels/pol_ent")
+    saveModel(model_pol_crime, "ClassificationModels/pol_crime")
+    saveModel(model_fin_sports, "ClassificationModels/fin_sports")
+    saveModel(model_fin_tech, "ClassificationModels/fin_tech")
+    saveModel(model_fin_ent, "ClassificationModels/fin_ent")
+    saveModel(model_fin_crime, "ClassificationModels/fin_crime")
+    saveModel(model_sports_tech, "ClassificationModels/sports_tech")
+    saveModel(model_sports_ent, "ClassificationModels/sports_ent")
+    saveModel(model_sports_crime, "ClassificationModels/sports_crime")
+    saveModel(model_tech_ent, "ClassificationModels/tech_ent")
+    saveModel(model_tech_crime, "ClassificationModels/tech_crime")
+    saveModel(model_ent_crime, "ClassificationModels/ent_crime")
+    return 'saved', 1
+
+
 def predictFunction(r, model_pol_fin, model_pol_sports, model_pol_tech, model_pol_ent, model_pol_crime,
                     model_fin_sports, model_fin_tech, model_fin_ent, model_fin_crime, model_sports_tech,
                     model_sports_ent, model_sports_crime, model_tech_ent, model_tech_crime, model_ent_crime,
                     labels):
-    lab_count = np.zeros((6), dtype="int32")
+    lab_count = np.zeros(6, dtype="int32")
     if model_pol_fin.predict(r[0].features) == 1:
         lab_count[0] += 1
     else:
@@ -133,18 +162,14 @@ def predictFunction(r, model_pol_fin, model_pol_sports, model_pol_tech, model_po
     correct = 0
     actual_label = labels[int(r[0].label)]
     if int(np.sum(lab_count)) == 0:
-        #return LabeledPoint(r[0].label, r[0].features), r[1], -1, int(r[0].label)
-        # return LabeledPoint(r[0].label, r[0].features), r[1], "Other", int(r[0].label), correct
-        return correct, "Other", actual_label, r[0].features, r[1]
+        return correct, "Other", actual_label, r[1]
     else:
         args = np.argwhere(lab_count == np.amax(lab_count))
         argl = args.flatten().tolist()
         pred_label = [labels[i] for i in argl]
         if r[0].label in argl:
             correct = 1
-        #return LabeledPoint(r[0].label, r[0].features), r[1], np.argmax(lab_count), int(r[0].label)
-        # return LabeledPoint(r[0].label, r[0].features), r[1], pred_label, int(r[0].label), correct
-        return correct, pred_label, actual_label, r[0].features, r[1]
+        return correct, pred_label, actual_label, r[1]
 
 
 def calcAccuracy(rdd):
@@ -152,8 +177,10 @@ def calcAccuracy(rdd):
     print(nrow)
     if nrow > 0:
         print("ACCURACY", rdd.filter(lambda x: x[0] == 1).count()/float(nrow))
-    #rdd.repartition(1)
-    #rdd.saveAsTextFiles("Output")
+
+
+def printCount(rdd):
+    print('Training data size: ', rdd.count())
 
 
 if __name__ == '__main__':
@@ -199,6 +226,7 @@ if __name__ == '__main__':
     parsedTestData = testData.map(f).cache()
 
     parsedData.pprint()
+    parsedData.foreachRDD(printCount)
 
     pol_fin = parsedData.filter(lambda p: (p[0].label == 0.0 or p[0].label == 1.0))
     pol_sports = parsedData.filter(lambda p: (p[0].label == 0.0 or p[0].label == 2.0))
@@ -305,8 +333,29 @@ if __name__ == '__main__':
                                                  model_ent_crime.latestModel(),
                                                  labels
                                                  ))
+
     output.pprint()
     output.foreachRDD(calcAccuracy)
-    output.saveAsTextFiles("Output/testData") #Or with path
+    output.saveAsTextFiles("Output/testData")
+
+    count = parsedData.map(lambda r: saveModels(r,
+                                        model_pol_fin.latestModel(),
+                                        model_pol_sports.latestModel(),
+                                        model_pol_tech.latestModel(),
+                                        model_pol_ent.latestModel(),
+                                        model_pol_crime.latestModel(),
+                                        model_fin_sports.latestModel(),
+                                        model_fin_tech.latestModel(),
+                                        model_fin_ent.latestModel(),
+                                        model_fin_crime.latestModel(),
+                                        model_sports_tech.latestModel(),
+                                        model_sports_ent.latestModel(),
+                                        model_sports_crime.latestModel(),
+                                        model_tech_ent.latestModel(),
+                                        model_tech_crime.latestModel(),
+                                        model_ent_crime.latestModel()
+                                        )).reduceByKey(lambda a, b: a+b)
+    count.pprint()  # so that the map function get executed
+
     ssc.start()
     ssc.awaitTermination()
