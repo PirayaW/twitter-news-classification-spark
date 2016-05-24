@@ -65,7 +65,7 @@ def parsePoint(line, index2word_set,model, num_features ):
     featureVec = np.zeros((num_features,),dtype="float32")
     nwords = 0.0
     text = line[0]
-    label = line[1]
+    label = 0 #line[1]
     if label == '':
         print(line[0])
     #print(cleanSent(text[3:]))
@@ -74,11 +74,6 @@ def parsePoint(line, index2word_set,model, num_features ):
         #if word and word not in stop and word in index2word_set:
             nwords = nwords + 1.0
             featureVec = np.add(featureVec,model[word])
-    ##### INCLUDE THIS PART IF LABEL INTO PICTURE
-    # if line[3] in index2word_set:
-    #     nwords = nwords + 1.0
-    #     featureVec = np.add(featureVec,model[word])
-    #####################################################
     #print("word count",nwords)
     featureVec = np.divide(featureVec,nwords)
     featureVec = np.nan_to_num(featureVec)
