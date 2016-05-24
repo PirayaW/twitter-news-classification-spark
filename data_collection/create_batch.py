@@ -31,8 +31,9 @@ if __name__ == '__main__':
                'HuffPostCrime',
                'CrimeInTheD',
                'CNNent',
-               'YahooCelebrity',
-               'YahooMusic']
+               'YahooCelebrity'
+               # 'YahooMusic'
+               ]
     label = [0,
              1,
              2,
@@ -43,8 +44,9 @@ if __name__ == '__main__':
              5,
              5,
              4,
-             4,
-             4]
+             4
+             # 4
+             ]
     begin = toDatetime('Sun May 01 00:00:00 +0000 2016')
     end = toDatetime('Sat May 07 23:59:59 +0000 2016')
     delta = datetime.timedelta(hours=12)
@@ -88,11 +90,12 @@ if __name__ == '__main__':
     for i in range(len(account)):
         acc = account[i]
         f = open(datapath + acc + '_before.json')
-        for line in f:
-            tweet = json.loads(line)
-            time = toDatetime(tweet['created_at'])
-            row = [tweet['text'].encode('ascii', 'replace'), label[i], time.strftime("%Y%m%d_%H"), acc]
-            beforeWriter.writerow(row)
+        for j, line in enumerate(f):
+            if (i < 3 and j < 2000) or (i >= 3 and j < 1000):
+                tweet = json.loads(line)
+                time = toDatetime(tweet['created_at'])
+                row = [tweet['text'].encode('ascii', 'replace'), label[i], time.strftime("%Y%m%d_%H"), acc]
+                beforeWriter.writerow(row)
         f.close()
 
     beforeFile.close()

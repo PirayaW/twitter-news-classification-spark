@@ -26,6 +26,8 @@ if __name__ == '__main__':
 
     # list of files
     filenames = next(os.walk(path))[2]
+    if '.DS_Store' in filenames:
+        filenames.remove('.DS_Store')
     filenames.sort()
     if not os.path.exists(dest):
         os.makedirs(dest)
@@ -35,18 +37,12 @@ if __name__ == '__main__':
     desttestfiles = next(os.walk(test_dest))[2]
 
     if len(destfiles) > 0:
-        if python_version == 3:
-            delete = input("Destination folder is not empty. Delete? (y/n): \n")
-        else:
-            delete = raw_input("Destination folder is not empty. Delete? (y/n): \n")
-        if delete == 'y' or delete == 'Y':
-            shutil.rmtree(dest, ignore_errors=True)
-            os.makedirs(dest)
-            shutil.rmtree(test_dest, ignore_errors=True)
-            os.makedirs(test_dest)
-        else:
-            print("Terminating")
-            exit(0)
+        shutil.rmtree(dest, ignore_errors=True)
+        os.makedirs(dest)
+        shutil.rmtree(test_dest, ignore_errors=True)
+        os.makedirs(test_dest)
+        print('Deleted existing files')
+        time.sleep(frequency)
 
     tr_percent = 0.7
     tr_numfiles = int(round(tr_percent*len(filenames)))

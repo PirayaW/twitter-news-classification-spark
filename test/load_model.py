@@ -11,6 +11,8 @@ if python_version == 3:
 else:
     import ConfigParser as configparser
     import cPickle
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
 
 
 if __name__ == '__main__':
