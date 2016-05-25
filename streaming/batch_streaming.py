@@ -13,7 +13,7 @@ else:
     import ConfigParser as configparser
 
 if __name__ == '__main__':
-    frequency = 20  # default frequency
+    frequency = 30  # default frequency
     if len(sys.argv) > 1:
         frequency = int(sys.argv[1])
 

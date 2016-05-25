@@ -6,6 +6,7 @@ import re
 import numpy as np
 import gzip
 from gensim.models import Word2Vec
+from bs4 import BeautifulSoup
 
 
 python_version = sys.version_info.major
@@ -31,6 +32,7 @@ def cleanSent(text):
     text = re.sub(r'http\S+', '', text)
     text = text.replace("via", " ")
     text = text.replace("$", "dollar")
+    text = BeautifulSoup(text, "lxml").get_text()
     text = "".join([ch for ch in text if ch not in string.punctuation])
     tokens = text.split(" ")
     cleaned = []
@@ -196,7 +198,7 @@ if __name__ == '__main__':
     from pyspark.streaming import StreamingContext
 
     sc = SparkContext('local[*]', appName="PythonLogisticRegressionWithLBFGSExample")
-    ssc = StreamingContext(sc, 20)
+    ssc = StreamingContext(sc, 30)
     sqlContext = SQLContext(sc)
 
     labels = ['Politics', 'Finance', 'Sports', 'Sci&Tech', 'Entertainment', 'Crime']

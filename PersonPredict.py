@@ -5,20 +5,16 @@ from __future__ import print_function
 
 import datetime
 import gzip
-from importlib import reload
+# from importlib import reload
 
 from gensim.models import Word2Vec
-from mpmath.tests.test_elliptic import zero, one
-from pyspark import SparkContext
+# from mpmath.tests.test_elliptic import zero, one
+
 # $example on$
 import pandas as pd
 import numpy as np
-from pyspark.mllib.classification import LogisticRegressionWithLBFGS, LogisticRegressionModel, LogisticRegressionWithSGD
-from pyspark.mllib.feature import HashingTF, IDF
-from pyspark.mllib.regression import LabeledPoint
 import csv
 # $example off$
-from pyspark.sql import SQLContext # or from pyspark.sql import HiveContext
 
 from Functions import cleanSent, parsePoint, makePredFile, Nlabels2, makePredOVO, ClassPostivePredictions
 import csv
@@ -36,9 +32,17 @@ if python_version == 3:
 else:
     import ConfigParser as configparser
     import cPickle
-config = configparser.RawConfigParser()
 
+config = configparser.RawConfigParser()
 config.read('config.properties')
+
+# pyspark need to be imported after import Functions, which sets path for pyspark
+from pyspark import SparkContext
+from pyspark.mllib.classification import LogisticRegressionWithLBFGS, LogisticRegressionModel, LogisticRegressionWithSGD
+from pyspark.mllib.feature import HashingTF, IDF
+from pyspark.mllib.regression import LabeledPoint
+from pyspark.sql import SQLContext # or from pyspark.sql import HiveContext
+
 # # Path for spark source folder
 # SPARK_HOME = config.get('Spark', 'SPARK_HOME')
 # print(SPARK_HOME)
@@ -55,7 +59,8 @@ sqlContext = SQLContext(sc)
 labels = ['Politics','Finance','Sports','Sci&Tech','Entertainment','Crime']
 labels_num = [[0.0,1.0],[0.0,2.0],[0.0,3.0],[0.0,4.0],[0.0,5.0],[1.0,2.0],[1.0,3.0],[1.0,4.0],[1.0,5.0],
              [2.0,3.0],[2.0,4.0],[2.0,5.0],[3.0,4.0],[3.0,5.0],[4.0,5.0]]
-data = sc.textFile("persondata/YahooNoise.csv")
+# data = sc.textFile("persondata/YahooNoise.csv")
+data = sc.textFile("batch_data/20160501_00.csv")
 data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 num_features = 300
 #model_name = "E:\\Punit\\D\\UCLA\\Spring16\\MSProject\\Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"

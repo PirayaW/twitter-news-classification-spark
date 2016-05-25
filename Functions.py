@@ -3,8 +3,32 @@ import string
 import nltk
 import numpy as np
 import re
+import sys
+import os
 from bs4 import BeautifulSoup
-from pyspark.mllib.feature import HashingTF, IDF
+# from pyspark.mllib.feature import HashingTF, IDF
+
+python_version = sys.version_info.major
+if python_version == 3:
+    import configparser
+    import pickle as cPickle
+
+else:
+    import ConfigParser as configparser
+    import cPickle
+
+config = configparser.RawConfigParser()
+config.read('config.properties')
+
+# Path for spark source folder
+SPARK_HOME = config.get('Spark', 'SPARK_HOME')
+os.environ['SPARK_HOME'] = SPARK_HOME
+
+# Append pyspark to Python Path
+sys.path.append(SPARK_HOME + config.get('Spark', 'python_path'))
+sys.path.append(SPARK_HOME + config.get('Spark', 'py4j_path'))
+
+print('config is done')
 from pyspark.mllib.regression import LabeledPoint
 
 def Nlabels2(line,c):
