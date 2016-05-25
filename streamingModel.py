@@ -50,22 +50,14 @@ def parsePoint(line, index2word_set, model, num_features):
     nwords = 0.0
     text = line[0]
     label = line[1]
-    if label == '':
-        print(line[0])
-    for word in cleanSent(text[3:]):
+    for word in cleanSent(text):
         if word and word in index2word_set:  # (name.upper() for name in USERNAMES)
             # if word and word not in stop and word in index2word_set:
             nwords = nwords + 1.0
             featureVec = np.add(featureVec, model[word])
-    ##### INCLUDE THIS PART IF LABEL INTO PICTURE
-    # if line[3] in index2word_set:
-    #     nwords = nwords + 1.0
-    #     featureVec = np.add(featureVec,model[word])
-    #####################################################
     featureVec = np.divide(featureVec, nwords)
     featureVec = np.nan_to_num(featureVec)
     return LabeledPoint(float(label), featureVec), text
-
 
 def saveModel(model, name):
     f = gzip.open(name + '.pkl.gz', 'wb')
@@ -219,7 +211,7 @@ if __name__ == '__main__':
     testData = testData.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 
     num_features = 300
-    model_name = "Models/ModelforStreaming300_label"  # Word2Vec Model
+    model_name = "Models/ModelforStreaming300_latest"  # Word2Vec Model
     model = Word2Vec.load(model_name)
     index2word_set = set(model.index2word)
     f = lambda j: parsePoint(j, index2word_set, model, num_features)

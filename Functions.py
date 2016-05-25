@@ -66,10 +66,8 @@ def parsePoint(line, index2word_set,model, num_features ):
     nwords = 0.0
     text = line[0]
     label = 0 #line[1]
-    if label == '':
-        print(line[0])
     #print(cleanSent(text[3:]))
-    for word in cleanSent(text[3:]):
+    for word in cleanSent(text):
         if word and word in index2word_set: #(name.upper() for name in USERNAMES)
         #if word and word not in stop and word in index2word_set:
             nwords = nwords + 1.0
