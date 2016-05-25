@@ -15,8 +15,6 @@ if python_version == 3:
 else:
     import ConfigParser as configparser
     import cPickle
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
 
 
 def Nlabels2(line, c):
@@ -341,7 +339,8 @@ if __name__ == '__main__':
     output.foreachRDD(calcAccuracy)
     output.saveAsTextFiles("Output/testData")
 
-    count = parsedData.map(lambda r: saveModels(r,
+    count = parsedData.map(lambda r: ('merged', 1)).reduceByKey(lambda a, b: a+b)
+    count = count.map(lambda r: saveModels(r,
                                         model_pol_fin.latestModel(),
                                         model_pol_sports.latestModel(),
                                         model_pol_tech.latestModel(),

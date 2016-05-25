@@ -3,12 +3,12 @@ import os
 import shutil
 import time
 
-from Tools.scripts.treesync import raw_input
 from random import sample, randint
 
 python_version = sys.version_info.major
 if python_version == 3:
     import configparser
+    from Tools.scripts.treesync import raw_input
 else:
     import ConfigParser as configparser
 
@@ -47,7 +47,8 @@ if __name__ == '__main__':
         shutil.rmtree(test_dest, ignore_errors=True)
         os.makedirs(test_dest)
         print('Deleted existing files')
-        time.sleep(frequency)
+
+    time.sleep(frequency)
 
     count = 0
     test_file_found = False
@@ -83,7 +84,8 @@ if __name__ == '__main__':
                     j = randint(0,len(test_num)-1)
                     test_file = filenames[test_num[j]]
                     test_file_found = True
-                shutil.copyfile(path + test_file, test_dest + test_file)
+                # differentiate destination filename
+                shutil.copyfile(path + test_file, test_dest + str(i) + '_' + test_file)
                 print('Copied Testing file: ' + test_file)
                 time.sleep(frequency)
 

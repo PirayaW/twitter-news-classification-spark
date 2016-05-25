@@ -10,4 +10,9 @@
 .idea/inspectionProfiles/profiles_settings.xml
 
 .idea/inspectionProfiles/Project_Default.xml
+
 config.properties
+
+streaming_test_data/
+
+streaming_data/
