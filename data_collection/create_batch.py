@@ -47,8 +47,8 @@ if __name__ == '__main__':
              4
              # 4
              ]
-    begin = toDatetime('Sun May 01 00:00:00 +0000 2016')
-    end = toDatetime('Sat May 07 23:59:59 +0000 2016')
+    begin = toDatetime('Sun May 15 00:00:00 +0000 2016')
+    end = toDatetime('Sat May 21 23:59:59 +0000 2016')
     delta = datetime.timedelta(hours=12)
     times = []
     date = begin
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     for i in range(len(account)):
         acc = account[i]
         count = 0
-        f = open(datapath + acc + '_oneweek.json')
+        f = open(datapath + acc + '_oneweek2.json')
         for line in f:
             tweet = json.loads(line)
             time = toDatetime(tweet['created_at'])
@@ -85,20 +85,20 @@ if __name__ == '__main__':
         file.close()
 
     # tweets before begin time
-    beforeFile = open(batchpath + beforeTime.strftime("%Y%m%d_%H") + '.csv', 'w')
-    beforeWriter = csv.writer(beforeFile, delimiter='`', quotechar='|', quoting=csv.QUOTE_ALL)
-    for i in range(len(account)):
-        acc = account[i]
-        f = open(datapath + acc + '_before.json')
-        for j, line in enumerate(f):
-            if (i < 3 and j < 2000) or (i >= 3 and j < 1000):
-                tweet = json.loads(line)
-                time = toDatetime(tweet['created_at'])
-                row = [tweet['text'].encode('ascii', 'replace'), label[i], time.strftime("%Y%m%d_%H"), acc]
-                beforeWriter.writerow(row)
-        f.close()
-
-    beforeFile.close()
+    # beforeFile = open(batchpath + beforeTime.strftime("%Y%m%d_%H") + '.csv', 'w')
+    # beforeWriter = csv.writer(beforeFile, delimiter='`', quotechar='|', quoting=csv.QUOTE_ALL)
+    # for i in range(len(account)):
+    #     acc = account[i]
+    #     f = open(datapath + acc + '_before.json')
+    #     for j, line in enumerate(f):
+    #         if (i < 3 and j < 2000) or (i >= 3 and j < 1000):
+    #             tweet = json.loads(line)
+    #             time = toDatetime(tweet['created_at'])
+    #             row = [tweet['text'].encode('ascii', 'replace'), label[i], time.strftime("%Y%m%d_%H"), acc]
+    #             beforeWriter.writerow(row)
+    #     f.close()
+    #
+    # beforeFile.close()
 
 # file = open(batchpath + times[len(files)-1].strftime("%Y%m%d_%H") + '.csv')
 # reader = csv.reader(file, delimiter='`', quotechar='|')
