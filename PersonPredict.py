@@ -59,14 +59,14 @@ sqlContext = SQLContext(sc)
 labels = ['Politics','Finance','Sports','Sci&Tech','Entertainment','Crime']
 labels_num = [[0.0,1.0],[0.0,2.0],[0.0,3.0],[0.0,4.0],[0.0,5.0],[1.0,2.0],[1.0,3.0],[1.0,4.0],[1.0,5.0],
              [2.0,3.0],[2.0,4.0],[2.0,5.0],[3.0,4.0],[3.0,5.0],[4.0,5.0]]
-# data = sc.textFile("persondata/YahooNoise.csv")
-data = sc.textFile("batch_data/20160501_00.csv")
+data = sc.textFile("persondata/YahooNoise.csv")
+#data = sc.textFile("batch_data/20160501_00.csv")
 data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 num_features = 300
 #model_name = "E:\\Punit\\D\\UCLA\\Spring16\\MSProject\\Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
 #model = Word2Vec.load_word2vec_format(model_name, binary=True)
 #model.init_sims(replace=True)
-model_name = "Models/ModelforStreaming300_label"
+model_name = "Models/ModelforStreaming300_latest"
 model = Word2Vec.load(model_name)
 index2word_set = set(model.index2word)
 f = lambda j: parsePoint(j, index2word_set,model, num_features)

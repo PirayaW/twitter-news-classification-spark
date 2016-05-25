@@ -18,7 +18,7 @@ def toDatetime(str):
 if __name__ == '__main__':
     config = configparser.RawConfigParser()
     config.read('../config.properties')
-    datapath = config.get('Path', 'json_data')
+    datapath = config.get('Path', 'json_persondata')
     batchpath = config.get('Path', 'persondata')
 
     account = ['jaketapper',
