@@ -16,3 +16,5 @@ config.properties
 streaming_test_data/
 
 streaming_data/
+
+/Output/testData-[0-9]*/_SUCCESS

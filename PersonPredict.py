@@ -59,7 +59,7 @@ sqlContext = SQLContext(sc)
 labels = ['Politics','Finance','Sports','Sci&Tech','Entertainment','Crime']
 labels_num = [[0.0,1.0],[0.0,2.0],[0.0,3.0],[0.0,4.0],[0.0,5.0],[1.0,2.0],[1.0,3.0],[1.0,4.0],[1.0,5.0],
              [2.0,3.0],[2.0,4.0],[2.0,5.0],[3.0,4.0],[3.0,5.0],[4.0,5.0]]
-data = sc.textFile("persondata/YahooNoise.csv")
+data = sc.textFile("persondata/DanWetzel.csv")
 #data = sc.textFile("batch_data/20160501_00.csv")
 data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 num_features = 300
