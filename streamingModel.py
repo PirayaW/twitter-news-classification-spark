@@ -48,6 +48,8 @@ def cleanSent(text):
 
 
 def parsePoint(line, index2word_set, model, num_features):
+    ###### IF USING GOOGLE WORD 2 VEC MODEL, PLEASE UNCOMMENT THE FOLLWOING LINE:
+    #index2word_set = [name.lower() for name in index2word_set]
     featureVec = np.zeros((num_features,), dtype="float32")
     nwords = 0.0
     text = line[0]
@@ -213,7 +215,7 @@ if __name__ == '__main__':
     testData = testData.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 
     num_features = 300
-    model_name = "Models/ModelforStreaming300_latest"  # Word2Vec Model
+    model_name = "Models/ModelforStreaming300_additional"  # Word2Vec Model
     model = Word2Vec.load(model_name)
     index2word_set = set(model.index2word)
     f = lambda j: parsePoint(j, index2word_set, model, num_features)

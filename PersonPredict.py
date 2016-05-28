@@ -16,7 +16,7 @@ import numpy as np
 import csv
 # $example off$
 
-from Functions import cleanSent, parsePoint, makePredFile, Nlabels2, makePredOVO, ClassPostivePredictions
+from Functions import cleanSent, makePredOVO
 import csv
 import os
 import sys
@@ -24,6 +24,21 @@ import string
 import re
 import numpy as np
 from gensim.models import Word2Vec
+
+def parsePoint(line, index2word_set, model, num_features):
+    ###### IF USING GOOGLE WORD 2 VEC MODEL, PLEASE UNCOMMENT THE FOLLWOING LINE:
+    #index2word_set = [name.lower() for name in index2word_set]
+    featureVec = np.zeros((num_features,), dtype="float32")
+    nwords = 0.0
+    text = line[0]
+    label = 0 #line[1], unlabeled data wont have this column, so putting dummy value
+    for word in cleanSent(text):
+        if word and word in index2word_set:
+            nwords = nwords + 1.0
+            featureVec = np.add(featureVec, model[word])
+    featureVec = np.divide(featureVec, nwords)
+    featureVec = np.nan_to_num(featureVec)
+    return LabeledPoint(float(label), featureVec), text
 
 python_version = sys.version_info.major
 if python_version == 3:
@@ -66,7 +81,7 @@ num_features = 300
 #model_name = "E:\\Punit\\D\\UCLA\\Spring16\\MSProject\\Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
 #model = Word2Vec.load_word2vec_format(model_name, binary=True)
 #model.init_sims(replace=True)
-model_name = "Models/ModelforStreaming300_latest"
+model_name = "Models/ModelforStreaming300_additional"
 model = Word2Vec.load(model_name)
 index2word_set = set(model.index2word)
 f = lambda j: parsePoint(j, index2word_set,model, num_features)
