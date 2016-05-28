@@ -215,6 +215,9 @@ if __name__ == '__main__':
     testData = testData.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 
     num_features = 300
+    #model_name = "Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
+    #model = Word2Vec.load_word2vec_format(model_name, binary=True)
+    #model.init_sims(replace=True)
     model_name = "Models/ModelforStreaming300_additional"  # Word2Vec Model
     model = Word2Vec.load(model_name)
     index2word_set = set(model.index2word)

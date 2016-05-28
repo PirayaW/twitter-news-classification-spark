@@ -78,7 +78,7 @@ data = sc.textFile("persondata/DanWetzel.csv")
 #data = sc.textFile("batch_data/20160501_00.csv")
 data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 num_features = 300
-#model_name = "E:\\Punit\\D\\UCLA\\Spring16\\MSProject\\Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
+#model_name = "Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
 #model = Word2Vec.load_word2vec_format(model_name, binary=True)
 #model.init_sims(replace=True)
 model_name = "Models/ModelforStreaming300_additional"
