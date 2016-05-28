@@ -48,8 +48,9 @@ def cleanSent(text):
 
 
 def parsePoint(line, index2word_set, model, num_features):
-    ###### IF USING GOOGLE WORD 2 VEC MODEL, PLEASE UNCOMMENT THE FOLLWOING LINE:
-    #index2word_set = [name.lower() for name in index2word_set]
+    # if googleModel:
+    #     ###### IF USING GOOGLE WORD 2 VEC MODEL, PLEASE UNCOMMENT THE FOLLOWING LINE:
+    #     index2word_set = [name.lower() for name in index2word_set]
     featureVec = np.zeros((num_features,), dtype="float32")
     nwords = 0.0
     text = line[0]
@@ -214,13 +215,22 @@ if __name__ == '__main__':
     data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
     testData = testData.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 
+    clear = True
     num_features = 300
-    #model_name = "Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
-    #model = Word2Vec.load_word2vec_format(model_name, binary=True)
-    #model.init_sims(replace=True)
-    model_name = "Models/ModelforStreaming300_additional"  # Word2Vec Model
-    model = Word2Vec.load(model_name)
-    index2word_set = set(model.index2word)
+    googleModel = False      # change model here
+    if googleModel:
+        # model_name = "Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
+        model_name = "Models/GoogleNews-vectors-negative300.bin"
+        model = Word2Vec.load_word2vec_format(model_name, binary=True)
+        # model.init_sims(replace=True)
+        index2word_set = set(model.index2word)
+        index2word_set = [name.lower() for name in index2word_set]
+    else:
+        model_name = "Models/ModelforStreaming300_additional"  # Word2Vec Model
+        model = Word2Vec.load(model_name)
+        index2word_set = set(model.index2word)
+    print('Word2Vec Model is loaded')
+    # print(model.most_similar(positive=['woman', 'king'], negative=['man']))
     f = lambda j: parsePoint(j, index2word_set, model, num_features)
     parsedData = data.map(f).cache()
     parsedTestData = testData.map(f).cache()
@@ -283,21 +293,70 @@ if __name__ == '__main__':
     model_tech_crime = StreamingLogisticRegressionWithSGD()
     model_ent_crime = StreamingLogisticRegressionWithSGD()
 
-    model_pol_fin.setInitialWeights([0.0] * num_features)
-    model_pol_sports.setInitialWeights([0.0] * num_features)
-    model_pol_tech.setInitialWeights([0.0] * num_features)
-    model_pol_ent.setInitialWeights([0.0] * num_features)
-    model_pol_crime.setInitialWeights([0.0] * num_features)
-    model_fin_sports.setInitialWeights([0.0] * num_features)
-    model_fin_tech.setInitialWeights([0.0] * num_features)
-    model_fin_ent.setInitialWeights([0.0] * num_features)
-    model_fin_crime.setInitialWeights([0.0] * num_features)
-    model_sports_tech.setInitialWeights([0.0] * num_features)
-    model_sports_ent.setInitialWeights([0.0] * num_features)
-    model_sports_crime.setInitialWeights([0.0] * num_features)
-    model_tech_ent.setInitialWeights([0.0] * num_features)
-    model_tech_crime.setInitialWeights([0.0] * num_features)
-    model_ent_crime.setInitialWeights([0.0] * num_features)
+    if clear:
+        model_pol_fin.setInitialWeights([0.0] * num_features)
+        model_pol_sports.setInitialWeights([0.0] * num_features)
+        model_pol_tech.setInitialWeights([0.0] * num_features)
+        model_pol_ent.setInitialWeights([0.0] * num_features)
+        model_pol_crime.setInitialWeights([0.0] * num_features)
+        model_fin_sports.setInitialWeights([0.0] * num_features)
+        model_fin_tech.setInitialWeights([0.0] * num_features)
+        model_fin_ent.setInitialWeights([0.0] * num_features)
+        model_fin_crime.setInitialWeights([0.0] * num_features)
+        model_sports_tech.setInitialWeights([0.0] * num_features)
+        model_sports_ent.setInitialWeights([0.0] * num_features)
+        model_sports_crime.setInitialWeights([0.0] * num_features)
+        model_tech_ent.setInitialWeights([0.0] * num_features)
+        model_tech_crime.setInitialWeights([0.0] * num_features)
+        model_ent_crime.setInitialWeights([0.0] * num_features)
+    else:
+        model_path = config.get('Path', 'classificationmodels')
+        with gzip.open(model_path + 'pol_fin.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_pol_fin.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'pol_sports.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_pol_sports.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'pol_tech.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_pol_tech.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'pol_ent.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_pol_ent.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'pol_crime.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_pol_crime.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'fin_sports.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_fin_sports.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'fin_tech.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_fin_tech.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'fin_ent.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_fin_ent.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'fin_crime.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_fin_crime.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'sports_tech.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_sports_tech.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'sports_ent.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_sports_ent.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'sports_crime.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_sports_crime.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'tech_ent.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_tech_ent.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'tech_crime.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_tech_crime.setInitialWeights(model.weights)
+        with gzip.open(model_path + 'ent_crime.pkl.gz', 'rb') as g:
+            model = cPickle.load(g)
+            model_ent_crime.setInitialWeights(model.weights)
+    print(model_ent_crime.latestModel().weights)
 
     model_pol_fin.trainOn(pol_fin.map(lambda x: x[0]))
     model_pol_sports.trainOn(pol_sports.map(lambda x: x[0]))

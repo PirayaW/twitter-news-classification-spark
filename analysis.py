@@ -34,7 +34,7 @@ labels_num = [[0.0, 1.0], [0.0, 2.0], [0.0, 3.0], [0.0, 4.0], [0.0, 5.0],
 data = sc.textFile("batch_data/20160430_12.csv")
 data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 num_features = 300
-model_name = "Models/ModelforStreaming300_latest"
+model_name = "Models/ModelforStreaming300_additional"
 model = Word2Vec.load(model_name)
 index2word_set = set(model.index2word)
 f = lambda j: parsePoint(j, index2word_set, model, num_features)
@@ -84,7 +84,7 @@ print(lab_count)
 
 print('Confusion Matrix')
 confusionMatrix = np.zeros((len(labels), len(labels)+1), dtype="int32")
-print(labels + ['Other'])
+correct = 0
 for i in range(len(lab_count)):
     actual_label = int(labels_[i])
     lc = lab_count[i]
@@ -94,10 +94,14 @@ for i in range(len(lab_count)):
         args = np.argwhere(lc == np.amax(lc))
         argl = args.flatten().tolist()
         pred_label = [labels[i] for i in argl]
+        # print(pred_label, labels[actual_label])
         if actual_label in argl:
-            correct = 1
+            correct += 1
         for j in argl:
             confusionMatrix[actual_label][j] += 1
 
+print('--------- CONFUSION MATRIX ------------')
+print(labels + ['Other'])
 print(confusionMatrix)
+print('ACCURACY', float(correct)/len(lab_count))
 print('Done')
