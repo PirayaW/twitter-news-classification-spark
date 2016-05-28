@@ -1,0 +1,75 @@
+Test accuracies
+0.734375
+0.671875
+0.59375
+0.421875
+0.703125
+0.65625
+0.75
+0.75
+0.765625
+
+Do you want to run test for only one file? (y/n) :
+y
+Deleted existing files
+[12, 32, 35, 38, 2, 21, 27, 13, 20, 34, 18, 31, 5, 4, 0, 14, 24, 28, 7, 37, 42, 1, 10, 9, 11, 23, 29, 3, 22, 33]
+[36, 6, 39, 8, 41, 15, 16, 17, 19, 40, 25, 26, 30]
+Copied Training file: 20160430_12.csv
+Copied Training file: 20160506_12.csv
+Copied Training file: 20160516_12.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160518_00.csv
+Copied Training file: 20160519_12.csv
+Copied Training file: 20160501_12.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160511_00.csv
+Copied Training file: 20160514_00.csv
+Copied Training file: 20160507_00.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160510_12.csv
+Copied Training file: 20160517_12.csv
+Copied Training file: 20160509_12.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160516_00.csv
+Copied Training file: 20160503_00.csv
+Copied Training file: 20160502_12.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160507_12.csv
+Copied Training file: 20160512_12.csv
+Copied Training file: 20160514_12.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160504_00.csv
+Copied Training file: 20160519_00.csv
+Copied Training file: 20160501_00.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160505_12.csv
+Copied Training file: 20160505_00.csv
+Copied Training file: 20160506_00.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160512_00.csv
+Copied Training file: 20160515_00.csv
+Copied Training file: 20160502_00.csv
+Copied Testing file: 20160515_12.csv
+Copied Training file: 20160511_12.csv
+Copied Training file: 20160517_00.csv
+
+
+
+PersonPredict
+[ 21   1  47 217  19  15]
+The most fitted category for DanWetzel is Sci&Tech
+===================================
+[ 11   3  15 263  10   3]
+The most fitted category for DaveDiMartino is Sci&Tech
+===================================
+[130   3   3 146   7  17]
+The most fitted category for jaketapper is Sci&Tech
+===================================
+[ 17  14   1 268   9   5]
+The most fitted category for michaelsantoli is Sci&Tech
+===================================
+[  2   3   3 291   0   1]
+The most fitted category for verge is Sci&Tech
+===================================
+[ 37   1  47 207  12  17]
+The most fitted category for YahooNoise is Sci&Tech
