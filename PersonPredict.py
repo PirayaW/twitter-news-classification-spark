@@ -152,7 +152,7 @@ for i in range(0,lab_count.shape[0]):
     if np.count_nonzero(lab_count[i,]) > 0:
         args = np.argwhere(lab_count[i,] == np.amax(lab_count[i,]))
         argl = args.flatten().tolist()
-        for i in argl:
-            label_count[i] +=1
+        for j in argl:
+            label_count[j] += 1
 print(label_count)
 print("The most fitted category for this person is %s" %labels[np.argmax(label_count)])

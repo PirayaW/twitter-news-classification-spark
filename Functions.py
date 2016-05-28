@@ -89,7 +89,7 @@ def parsePoint(line, index2word_set,model, num_features ):
     featureVec = np.zeros((num_features,),dtype="float32")
     nwords = 0.0
     text = line[0]
-    label = 0 #line[1]
+    label = line[1]
     #print(cleanSent(text[3:]))
     for word in cleanSent(text):
         if word and word in index2word_set: #(name.upper() for name in USERNAMES)
@@ -106,9 +106,9 @@ def makePredFile(df):
     return idx
 
 def makePredOVO(df,num,lab_count):
-    idx = df[df.prediction==1.0].index.tolist()
+    idx = df[df.prediction==1].index.tolist()
     lab_count[idx,num[0]] += 1
-    idx = df[df.prediction==0.0].index.tolist()
+    idx = df[df.prediction==0].index.tolist()
     lab_count[idx,num[1]] += 1
     return lab_count
 
