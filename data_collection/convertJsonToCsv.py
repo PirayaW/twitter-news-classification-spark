@@ -21,16 +21,26 @@ if __name__ == '__main__':
     datapath = config.get('Path', 'json_data')
     batchpath = config.get('Path', 'batch_data')
 
-    account = ['new_bpolitics',
-               'new_ReutersBiz',
-               'new_espn'
+    # account = ['new_bpolitics',
+    #            'new_ReutersBiz',
+    #            'new_espn'
+    #            ]
+    # label = [0,
+    #          1,
+    #          2
+    #          ]
+    account = ['new_EW',
+               'new_etnow',
+               'new_enews',
+               'new_THR'
                ]
-    label = [0,
-             1,
-             2
+    label = [4,
+             4,
+             4,
+             4
              ]
 
-    file = open('additionalPoliticsFinanceSports.csv', 'w')
+    file = open('additionalEntertainment.csv', 'w')
     writer = csv.writer(file, delimiter='`', quotechar='|', quoting=csv.QUOTE_ALL)
 
     for i in range(len(account)):
