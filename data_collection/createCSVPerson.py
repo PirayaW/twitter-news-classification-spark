@@ -20,13 +20,17 @@ if __name__ == '__main__':
     config.read('../config.properties')
     datapath = config.get('Path', 'json_persondata')
     batchpath = config.get('Path', 'persondata')
-
-    account = ['jaketapper',
-                   'YahooNoise',
-                  'DanWetzel',
-                   'DaveDiMartino',
-                   'michaelsantoli',
-                   'verge']
+    print(batchpath)
+    account = [
+                    'maddow',
+                   'SuzeOrmanShow',
+                   'justin_fenton',
+                   'JamieHersch',
+                   'lifehacker',
+                   'TMZ',
+                    'chinpanchamia',
+                    'SumitGouthaman'
+                   ]
 
     for i in range(len(account)):
         acc = account[i]

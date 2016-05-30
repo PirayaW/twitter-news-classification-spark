@@ -32,7 +32,7 @@ def parsePoint(line, index2word_set, model, num_features):
     nwords = 0.0
     text = line[0]
     label = 0 #line[1], unlabeled data wont have this column, so putting dummy value
-    for word in cleanSent(text):
+    for word in cleanSent(text[2:]):
         if word and word in index2word_set:
             nwords = nwords + 1.0
             featureVec = np.add(featureVec, model[word])
@@ -80,7 +80,9 @@ for i in range(0, len(modelnames)):
     models.append(model)
     g.close()
 
-persons = ['DanWetzel', 'DaveDiMartino', 'jaketapper', 'michaelsantoli', 'verge', 'YahooNoise']
+persons = ['DanWetzel', 'DaveDiMartino', 'jaketapper', 'michaelsantoli', 'verge', 'YahooNoise',
+           'maddow', 'SuzeOrmanShow', 'justin_fenton' , 'JamieHersch', 'lifehacker', 'TMZ',
+           'chinpanchamia', 'SumitGouthaman']
 for person in persons:
     data = sc.textFile("persondata/" + person + ".csv")
     data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
