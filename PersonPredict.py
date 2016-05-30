@@ -96,7 +96,7 @@ for person in persons:
         index2word_set = set(model.index2word)
         index2word_set = [name.lower() for name in index2word_set]
     else:
-        model_name = "Models/ModelforStreaming300_additional_ent"
+        model_name = "Models/ModelforStreaming300_final"
         model = Word2Vec.load(model_name)
         index2word_set = set(model.index2word)
     print('Model loaded')

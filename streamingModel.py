@@ -351,7 +351,7 @@ if __name__ == '__main__':
         index2word_set = set(word2vec_model.index2word)
         index2word_set = [name.lower() for name in index2word_set]
     else:
-        model_name = "Models/ModelforStreaming300_additional_ent"  # Word2Vec Model
+        model_name = "Models/ModelforStreaming300_final"  # Word2Vec Model
         word2vec_model = Word2Vec.load(model_name)
         index2word_set = set(word2vec_model.index2word)
     print('Word2Vec Model is loaded')
