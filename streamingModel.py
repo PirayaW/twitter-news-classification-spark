@@ -351,7 +351,7 @@ if __name__ == '__main__':
         index2word_set = set(word2vec_model.index2word)
         index2word_set = [name.lower() for name in index2word_set]
     else:
-        model_name = "Models/ModelforStreaming300_additional"  # Word2Vec Model
+        model_name = "Models/ModelforStreaming300_additional_ent"  # Word2Vec Model
         word2vec_model = Word2Vec.load(model_name)
         index2word_set = set(word2vec_model.index2word)
     print('Word2Vec Model is loaded')
@@ -517,7 +517,7 @@ if __name__ == '__main__':
                                                  model_tech_crime.latestModel(),
                                                  model_ent_crime.latestModel(),
                                                  labels
-                                                 )).cache()
+                                                 ))
     testOutput.pprint()
     testOutput.foreachRDD(calcAccuracy)
     testOutput.saveAsTextFiles("Output/testData")
@@ -539,7 +539,7 @@ if __name__ == '__main__':
                                                  model_tech_ent.latestModel(),
                                                  model_tech_crime.latestModel(),
                                                  model_ent_crime.latestModel()
-                                                 )).cache()
+                                                 ))
     unlabelledOutput.pprint()
     unlabelledOutput.foreachRDD(printCountUnlabelled)
     unlabelledOutput.saveAsTextFiles("Output/unlabelledData")

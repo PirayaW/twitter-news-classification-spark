@@ -14,10 +14,10 @@
 config.properties
 
 streaming_test_data/
-
 streaming_data/
+streaming_signal/
 
 Output/testData-[0-9]*/_SUCCESS
-Output/unlabeledData-[0-9]*/_SUCCESS
+Output/unlabelledData-[0-9]*/_SUCCESS
 
 Models/GoogleNews-vectors-negative300.bin
