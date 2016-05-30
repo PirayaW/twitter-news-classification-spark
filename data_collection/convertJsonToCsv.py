@@ -29,18 +29,24 @@ if __name__ == '__main__':
     #          1,
     #          2
     #          ]
-    account = ['new_EW',
-               'new_etnow',
-               'new_enews',
-               'new_THR'
+    account = ['new_CrimeStoppersOR',
+               'new_CrimeWorId',
+               'new_e_entertainment',
+               'new_TMZ',
+               'new_ftfinancenews',
+               'new_nytpolitics',
+               'new_sciam'
                ]
-    label = [4,
+    label = [5,
+             5,
              4,
              4,
-             4
+             1,
+             0,
+             3
              ]
 
-    file = open('additionalEntertainment.csv', 'w')
+    file = open('additionalEntertainmentPoliticsFinanceSciCrime.csv', 'w')
     writer = csv.writer(file, delimiter='`', quotechar='|', quoting=csv.QUOTE_ALL)
 
     for i in range(len(account)):
