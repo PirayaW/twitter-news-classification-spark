@@ -47,7 +47,7 @@ def cleanSent(text):
         return [""]
 
 
-def parsePoint(line, index2word_set, model, num_features):
+def parsePoint(line, index2word_set, word2vec_model, num_features):
     # if googleModel:
     #     ###### IF USING GOOGLE WORD 2 VEC MODEL, PLEASE UNCOMMENT THE FOLLOWING LINE:
     #     index2word_set = [name.lower() for name in index2word_set]
@@ -59,10 +59,26 @@ def parsePoint(line, index2word_set, model, num_features):
         if word and word in index2word_set:  # (name.upper() for name in USERNAMES)
             # if word and word not in stop and word in index2word_set:
             nwords = nwords + 1.0
-            featureVec = np.add(featureVec, model[word])
+            featureVec = np.add(featureVec, word2vec_model[word])
     featureVec = np.divide(featureVec, nwords)
     featureVec = np.nan_to_num(featureVec)
     return LabeledPoint(float(label), featureVec), text
+
+
+def parsePointUnlabelled(line, index2word_set, word2vec_model, num_features):
+    featureVec = np.zeros((num_features,), dtype="float32")
+    nwords = 0.0
+    text = line[0]
+    label = 0.0
+    for word in cleanSent(text):
+        if word and word in index2word_set:  # (name.upper() for name in USERNAMES)
+            # if word and word not in stop and word in index2word_set:
+            nwords = nwords + 1.0
+            featureVec = np.add(featureVec, word2vec_model[word])
+    featureVec = np.divide(featureVec, nwords)
+    featureVec = np.nan_to_num(featureVec)
+    return LabeledPoint(label, featureVec), text
+
 
 def saveModel(model, name):
     f = gzip.open(name + '.pkl.gz', 'wb')
@@ -170,15 +186,121 @@ def predictFunction(r, model_pol_fin, model_pol_sports, model_pol_tech, model_po
         return correct, pred_label, actual_label, r[1]
 
 
+def predictFunctionUnlabelled(r, model_pol_fin, model_pol_sports, model_pol_tech, model_pol_ent, model_pol_crime,
+                            model_fin_sports, model_fin_tech, model_fin_ent, model_fin_crime, model_sports_tech,
+                            model_sports_ent, model_sports_crime, model_tech_ent, model_tech_crime, model_ent_crime):
+    lab_count = np.zeros(6, dtype="int32")
+    if model_pol_fin.predict(r[0].features) == 1:
+        lab_count[0] += 1
+    else:
+        lab_count[1] += 1
+    if model_pol_sports.predict(r[0].features) == 1:
+        lab_count[0] += 1
+    else:
+        lab_count[2] += 1
+    if model_pol_tech.predict(r[0].features) == 1:
+        lab_count[0] += 1
+    else:
+        lab_count[3] += 1
+    if model_pol_ent.predict(r[0].features) == 1:
+        lab_count[0] += 1
+    else:
+        lab_count[4] += 1
+    if model_pol_crime.predict(r[0].features) == 1:
+        lab_count[0] += 1
+    else:
+        lab_count[5] += 1
+    if model_fin_sports.predict(r[0].features) == 1:
+        lab_count[1] += 1
+    else:
+        lab_count[2] += 1
+    if model_fin_tech.predict(r[0].features) == 1:
+        lab_count[1] += 1
+    else:
+        lab_count[3] += 1
+    if model_fin_ent.predict(r[0].features) == 1:
+        lab_count[1] += 1
+    else:
+        lab_count[4] += 1
+    if model_fin_crime.predict(r[0].features) == 1:
+        lab_count[1] += 1
+    else:
+        lab_count[5] += 1
+    if model_sports_tech.predict(r[0].features) == 1:
+        lab_count[2] += 1
+    else:
+        lab_count[3] += 1
+    if model_sports_ent.predict(r[0].features) == 1:
+        lab_count[2] += 1
+    else:
+        lab_count[4] += 1
+    if model_sports_crime.predict(r[0].features) == 1:
+        lab_count[2] += 1
+    else:
+        lab_count[5] += 1
+    if model_tech_ent.predict(r[0].features) == 1:
+        lab_count[3] += 1
+    else:
+        lab_count[4] += 1
+    if model_tech_crime.predict(r[0].features) == 1:
+        lab_count[3] += 1
+    else:
+        lab_count[5] += 1
+    if model_ent_crime.predict(r[0].features) == 1:
+        lab_count[4] += 1
+    else:
+        lab_count[5] += 1
+    if int(np.sum(lab_count)) == 0:
+        return "Other", r[1]
+    else:
+        args = np.argwhere(lab_count == np.amax(lab_count))
+        argl = args.flatten().tolist()
+        pred_label = [labels[i] for i in argl]
+        return pred_label, r[1]
+
+
 def calcAccuracy(rdd):
     nrow = rdd.count()
-    print(nrow)
+    print('Test data size: ', nrow)
     if nrow > 0:
         print("ACCURACY", rdd.filter(lambda x: x[0] == 1).count()/float(nrow))
 
 
-def printCount(rdd):
+def printCountTraining(rdd):
     print('Training data size: ', rdd.count())
+
+
+def printCountUnlabelled(rdd):
+    print('Unlabelled data size: ', rdd.count())
+
+
+def printCountSignal(rdd):
+    print('Number of signals: ', rdd.count())
+
+
+def processSignal(r, model_pol_fin, model_pol_sports, model_pol_tech, model_pol_ent, model_pol_crime,
+                   model_fin_sports, model_fin_tech, model_fin_ent, model_fin_crime, model_sports_tech,
+                   model_sports_ent, model_sports_crime, model_tech_ent, model_tech_crime, model_ent_crime):
+    sig = r.split()
+    result = 'unsuccessful signal processing', 1
+    if 'save' in sig:
+        saveModel(model_pol_fin, "ClassificationModels/pol_fin")
+        saveModel(model_pol_sports, "ClassificationModels/pol_sports")
+        saveModel(model_pol_tech, "ClassificationModels/pol_tech")
+        saveModel(model_pol_ent, "ClassificationModels/pol_ent")
+        saveModel(model_pol_crime, "ClassificationModels/pol_crime")
+        saveModel(model_fin_sports, "ClassificationModels/fin_sports")
+        saveModel(model_fin_tech, "ClassificationModels/fin_tech")
+        saveModel(model_fin_ent, "ClassificationModels/fin_ent")
+        saveModel(model_fin_crime, "ClassificationModels/fin_crime")
+        saveModel(model_sports_tech, "ClassificationModels/sports_tech")
+        saveModel(model_sports_ent, "ClassificationModels/sports_ent")
+        saveModel(model_sports_crime, "ClassificationModels/sports_crime")
+        saveModel(model_tech_ent, "ClassificationModels/tech_ent")
+        saveModel(model_tech_crime, "ClassificationModels/tech_crime")
+        saveModel(model_ent_crime, "ClassificationModels/ent_crime")
+        result = 'successfully saved', 1
+    return result
 
 
 if __name__ == '__main__':
@@ -212,31 +334,34 @@ if __name__ == '__main__':
                   [4.0, 5.0]]
     data = ssc.textFileStream("streaming_data/")  # SPECIFY THE TRAINING DATA DIRECTORY HERE
     testData = ssc.textFileStream("streaming_test_data/")  # SPECIFY THE TESTING DATA DIRECTORY HERE
+    unlabelledData = ssc.textFileStream("streaming_unlabelled_data/")
+    signal = ssc.textFileStream("streaming_signal/")
     data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
     testData = testData.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
+    unlabelledData = unlabelledData.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 
-    clear = True
+    clear = False
     num_features = 300
     googleModel = False      # change model here
     if googleModel:
         # model_name = "Models\\GoogleNews-vectors-negative300.bin\\GoogleNews-vectors-negative300.bin"
         model_name = "Models/GoogleNews-vectors-negative300.bin"
-        model = Word2Vec.load_word2vec_format(model_name, binary=True)
+        word2vec_model = Word2Vec.load_word2vec_format(model_name, binary=True)
         # model.init_sims(replace=True)
-        index2word_set = set(model.index2word)
+        index2word_set = set(word2vec_model.index2word)
         index2word_set = [name.lower() for name in index2word_set]
     else:
         model_name = "Models/ModelforStreaming300_additional"  # Word2Vec Model
-        model = Word2Vec.load(model_name)
-        index2word_set = set(model.index2word)
+        word2vec_model = Word2Vec.load(model_name)
+        index2word_set = set(word2vec_model.index2word)
     print('Word2Vec Model is loaded')
-    # print(model.most_similar(positive=['woman', 'king'], negative=['man']))
-    f = lambda j: parsePoint(j, index2word_set, model, num_features)
+    f = lambda j: parsePoint(j, index2word_set, word2vec_model, num_features)
     parsedData = data.map(f).cache()
     parsedTestData = testData.map(f).cache()
+    parsedUnlabelledData = unlabelledData.map(lambda j: parsePointUnlabelled(j, index2word_set, word2vec_model, num_features)).cache()
 
     parsedData.pprint()
-    parsedData.foreachRDD(printCount)
+    parsedData.foreachRDD(printCountTraining)
 
     pol_fin = parsedData.filter(lambda p: (p[0].label == 0.0 or p[0].label == 1.0))
     pol_sports = parsedData.filter(lambda p: (p[0].label == 0.0 or p[0].label == 2.0))
@@ -374,7 +499,8 @@ if __name__ == '__main__':
     model_tech_crime.trainOn(tech_crime.map(lambda x: x[0]))
     model_ent_crime.trainOn(ent_crime.map(lambda x: x[0]))
 
-    output = parsedTestData.map(lambda r: predictFunction(r,
+    # test on test data
+    testOutput = parsedTestData.map(lambda r: predictFunction(r,
                                                  model_pol_fin.latestModel(),
                                                  model_pol_sports.latestModel(),
                                                  model_pol_tech.latestModel(),
@@ -391,12 +517,34 @@ if __name__ == '__main__':
                                                  model_tech_crime.latestModel(),
                                                  model_ent_crime.latestModel(),
                                                  labels
-                                                 ))
+                                                 )).cache()
+    testOutput.pprint()
+    testOutput.foreachRDD(calcAccuracy)
+    testOutput.saveAsTextFiles("Output/testData")
 
-    output.pprint()
-    output.foreachRDD(calcAccuracy)
-    output.saveAsTextFiles("Output/testData")
+    # classify unlabelled data
+    unlabelledOutput = parsedUnlabelledData.map(lambda r: predictFunctionUnlabelled(r,
+                                                 model_pol_fin.latestModel(),
+                                                 model_pol_sports.latestModel(),
+                                                 model_pol_tech.latestModel(),
+                                                 model_pol_ent.latestModel(),
+                                                 model_pol_crime.latestModel(),
+                                                 model_fin_sports.latestModel(),
+                                                 model_fin_tech.latestModel(),
+                                                 model_fin_ent.latestModel(),
+                                                 model_fin_crime.latestModel(),
+                                                 model_sports_tech.latestModel(),
+                                                 model_sports_ent.latestModel(),
+                                                 model_sports_crime.latestModel(),
+                                                 model_tech_ent.latestModel(),
+                                                 model_tech_crime.latestModel(),
+                                                 model_ent_crime.latestModel()
+                                                 )).cache()
+    unlabelledOutput.pprint()
+    unlabelledOutput.foreachRDD(printCountUnlabelled)
+    unlabelledOutput.saveAsTextFiles("Output/unlabelledData")
 
+    # save the models
     count = parsedData.map(lambda r: ('merged', 1)).reduceByKey(lambda a, b: a+b)
     count = count.map(lambda r: saveModels(r,
                                         model_pol_fin.latestModel(),
@@ -416,6 +564,26 @@ if __name__ == '__main__':
                                         model_ent_crime.latestModel()
                                         )).reduceByKey(lambda a, b: a+b)
     count.pprint()  # so that the map function get executed
+
+    # process signal
+    signal = signal.map(lambda r: processSignal(r,
+                                           model_pol_fin.latestModel(),
+                                           model_pol_sports.latestModel(),
+                                           model_pol_tech.latestModel(),
+                                           model_pol_ent.latestModel(),
+                                           model_pol_crime.latestModel(),
+                                           model_fin_sports.latestModel(),
+                                           model_fin_tech.latestModel(),
+                                           model_fin_ent.latestModel(),
+                                           model_fin_crime.latestModel(),
+                                           model_sports_tech.latestModel(),
+                                           model_sports_ent.latestModel(),
+                                           model_sports_crime.latestModel(),
+                                           model_tech_ent.latestModel(),
+                                           model_tech_crime.latestModel(),
+                                           model_ent_crime.latestModel()
+                                           ))
+    signal.foreachRDD(printCountSignal)
 
     ssc.start()
     ssc.awaitTermination()

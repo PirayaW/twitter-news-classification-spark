@@ -18,5 +18,6 @@ streaming_test_data/
 streaming_data/
 
 Output/testData-[0-9]*/_SUCCESS
+Output/unlabeledData-[0-9]*/_SUCCESS
 
 Models/GoogleNews-vectors-negative300.bin
