@@ -31,7 +31,7 @@ def twitter_fetch(screen_name="", maxnumtweets=0):
 
     api = tweepy.API(auth)
 
-    filename = datapath + 'new_' + screen_name + '.json'
+    filename = datapath + 'unlabelled_' + screen_name + '.json'
     with open(filename, 'a') as outfile:
         for status in tweepy.Cursor(api.user_timeline, id=screen_name).items(maxnumtweets):
             json_str = status._json
@@ -59,5 +59,6 @@ if __name__ == '__main__':
                    'YahooCelebrity'
                    # 'YahooMusic'
                    ]
+        account = ['SkyNewsBreak']
         for acc in account:
-            twitter_fetch(acc, 1000)
+            twitter_fetch(acc, 2000)

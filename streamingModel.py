@@ -540,7 +540,7 @@ if __name__ == '__main__':
                                                  model_tech_crime.latestModel(),
                                                  model_ent_crime.latestModel()
                                                  ))
-    unlabelledOutput.pprint()
+    unlabelledOutput.pprint(20)
     unlabelledOutput.foreachRDD(printCountUnlabelled)
     unlabelledOutput.saveAsTextFiles("Output/unlabelledData")
 

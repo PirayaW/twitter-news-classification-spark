@@ -86,7 +86,7 @@ def runRealtime():
     auth.set_access_token(access_token, access_secret)
 
     api = tweepy.API(auth)
-    account_list = ['ptoeyw']
+    account_list = ['SkyNewsBreak']
 
     while True:
         now = datetime.datetime.utcnow().replace(tzinfo=None)

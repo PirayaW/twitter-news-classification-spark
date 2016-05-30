@@ -16,6 +16,7 @@ config.properties
 streaming_test_data/
 streaming_data/
 streaming_signal/
+streaming_unlabelled_data/
 
 Output/testData-[0-9]*/_SUCCESS
 Output/unlabelledData-[0-9]*/_SUCCESS
