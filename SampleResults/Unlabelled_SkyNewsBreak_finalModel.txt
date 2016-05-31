@@ -1,0 +1,123 @@
+20160522_00.csv
+(['Crime'], 'AP: Police say gunman fired shots into a crowd in western #Austria killing two people &amp; wounding 11 others before shooting himself to death')
+(['Crime'], 'AP: Police say a gunman has killed two people and wounded 11 others at a concert in western #Austria')
+(['Politics'], 'AP: Senior Taliban commander has confirmed the death of leader Mullah Akhtar Mansour in a U.S. drone strike')
+
+20160522_12.csv
+(['Politics'], 'Iraqi prime minister Haider al-Abadi has announced the start of an operation to retake #Fallujah from Islamic State')
+(['Sports'], "British director Ken Loach has won a second Palme D'Or at the #Cannes Film Festival for 'I, Daniel Blake'")
+(['Sports'], 'England have beaten Turkey 2-1 in their Euro 2016 warm-up friendly at the Etihad Stadium in Manchester')
+(['Politics'], "Austria's interior ministry: Far-right candidate Norbert #Hofer has collected 51.9% of votes to be the next president excluding postal votes")
+(['Politics'], "#StewartHosie has announced he will step down as deputy leader of the #SNP at the party's annual conference in autumn")
+(['Politics'], 'Rebel groups in #Syria say agreed "cessation of hostilities" deal will end if Syrian Army does not stop assault on #Damascus within 48 hours')
+
+20160523_00.csv
+(['Sports'], "Manchester United will make a statement regarding Louis van Gaal's future at 1pm which is expected to confirm he has been sacked as manager")
+(['Politics'], 'Islamic State says it is responsible for a suicide car bombing that killed at least 40 army recruits &amp; injured 60 others in #Aden in #Yemen')
+(['Politics'], 'London Mayor Sadiq Khan has announced the all-night Tube service will be launched on 19 August on the Central and Victoria lines')
+(['Finance'], 'Update - Security officials in #Yemen say two suicide bombings have killed 45 people in the southern city of #Aden')
+(['Politics'], 'Update - Military official says a suicide bomber has killed at least 20 people including army recruits in the city of #Aden in #Yemen')
+(['Finance'], 'Reuters: Security official says a suicide bomber has killed at least 12 army recruits and injured dozens of others in #Aden in #Yemen')
+(['Politics'], 'President Obama has lifted the arms export embargo on #Vietnam during his first official visit to the country')
+
+20160523_12.csv
+(['Sports'], '#ManchesterUnited have confirmed they have sacked manager Louis van Gaal')
+(['Politics'], "North Yorkshire county council has approved Third Energy's #fracking bid to drill near the village of #KirbyMisperton")
+(['Politics'], 'AFP: #FIFA has sacked acting secretary general #MarkusKattner over alleged financial breaches')
+(['Crime'], '#AymanShaukat has been sentenced to 15 years including 10 years in prison after being found guilty of #Syria-related terrorism offences')
+(['Politics'], 'Alexander Van der Bellen has been elected as president of #Austria after defeating far-right candidate Norbert Hofer')
+(['Sports'], '#MohammedZaman has been sentenced to six years in prison after a customer with an allergy died after he ate a curry containing peanuts')
+(['Sci&Tech'], 'Football Association of #Wales says #ChrisColeman has signed a new two-year deal to stay as Wales manager through to the 2018 World Cup')
+(['Crime'], 'Restaurant owner Mohammed Zaman found guilty of manslaughter by gross negligence after a customer died after eating food containing peanuts')
+
+20160524_00.csv
+(['Politics'], 'British expats have lost their battle in the Supreme Court for the right to vote in the EU referendum #EUref')
+(['Finance'], 'Reuters: Egyptian head of forensics denies reports that an initial examination of human remains points to an explosion on #Egyptair #MS804')
+(['Finance'], 'RMT union says London Underground maintenance and engineering workers have voted to go on strike in a row linked to the night Tube service')
+(['Sports'], 'Sky Sources: Jose #Mourinho is close to agreeing personal terms with Manchester United to become their new manager')
+(['Finance'], 'International Organisation for Migration says 1,370 migrants have died in Mediterranean so far in 2016 - 25% lower than same period in 2015')
+(['Finance'], 'AP: An Egyptian forensic official says human remains retrieved from the #Egyptair #MS804 crash site point to an explosion on board')
+
+20160524_12.csv
+(['Sports'], 'Sky Sources: #JoseMourinho agrees personal terms with #ManchesterUnited but outstanding issues must be resolved before a contract is signed')
+(['Politics'], '#BillCosby has been ordered to stand trial in #Pennsylvania in a sex-assault case stemming from 2004')
+(['Sports'], 'AFP: Russian athletics federation says athletes with previous doping offences will be barred from Rio')
+(['Finance'], 'AFP: #Russia says 14 athletes who competed in the 2008 Olympics have tested positive in the latest round of drug tests')
+(['Sports'], 'Liverpool &amp; Manchester United fined ?40,000 (?30,565) each by UEFA ethics body for illicit chants by supporters at their Europa League ties')
+(['Sports'], 'Burt Kwouk who was best known for playing #CatoFong in the #PinkPanther films has died at the age of 85')
+
+20160525_00.csv
+(['Sports'], 'Heather Watson has lost 6-1 6-3 to Svetlana Kuznetsova in the second round of the #FrenchOpen')
+(['Crime'], 'Police searching for missing 39-year-old David Cauldwell have found two bodies in the area of Petitor Woods in #Torquay')
+(['Finance'], 'Royal Dutch #Shell has announced an additional 2,200 job cuts with 475 UK roles to be affected')
+(['Politics'], 'Swedish court has upheld an arrest warrant for #WikiLeaks founder #JulianAssange who is wanted for questioning over 2010 rape allegation')
+(['Finance'], 'PM: There has been encouraging number of serious offers for #TataSteel UK assets but no guarantees of successful conclusion to sale process')
+(['Sci&Tech'], 'Lord Sugar has been appointed Enterprise Tsar as part of a Government drive to encourage young people to start their own businesses')
+(['Finance'], 'M&amp;S has reported underlying full-year profits of ?689.6m for the year ending 2 April')
+(['Politics'], 'Afghan interior ministry: 10 people killed and four injured in a suicide attack on a bus carrying state prosecutors near the capital #Kabul')
+
+20160525_12.csv
+(['Politics'], 'Four suspected Islamic State recruiters have been detained in #Belgium with authorities saying they may have been planning new attacks')
+(['Sports'], "Andy Murray has won his second-round match at the #FrenchOpen 6-2 2-6 4-6 6-2 6-3 against France's Mathias Bourgue")
+(['Sports'], 'Kyle Edmund has lost his second-round match at the #FrenchOpen 6-4 6-4 6-4 to American 15th seed John Isner')
+(['Politics'], 'Unite union says #ThomasCook cabin crew have voted by 3-1 in favour of a strike in a row over health and safety')
+
+20160526_00.csv
+(['Sci&Tech'], 'French media is reporting that an armed man on an extremist watch list has blocked himself into an apartment in #Paris')
+(['Finance'], 'Office for National Statistics - net migration of EU citizens to Britain was 184,000 in 2015 - up 10,000 on the previous year')
+(['Finance'], 'Office for National Statistics says net long-term migration to the UK was 333,000 in 2015 - the second highest level on record')
+
+20160526_12.csv
+(['Crime'], 'West Midlands Police says three men have been charged with Syria-related terror offences')
+(['Sports'], 'Foreign Office: A British woman has died &amp; another Briton has been injured after a speedboat reportedly capsized near Koh Samui in Thailand')
+(['Sports'], 'Sky Sources: #JoseMourinho has been appointed as the new Manchester United manager #MUFC')
+(['Finance'], 'Update - McDonald\'s says it is "cooperating fully with the authorities" after police raided French headquarters over tax fraud investigation')
+(['Finance'], 'French riot police have fired at least six rounds of tear gas as thousands of protesters march in #Paris urging govt to withdraw labour bill')
+(['Sci&Tech'], 'German police launch investigation to identify 2 men believed to be Britons in photo performing Nazi salute at Buchenwald concentration camp')
+(['Politics'], 'AP: Donald #Trump has reached the number of delegates needed to clinch the Republican U.S. presidential nomination')
+(['Finance'], "AFP: French police say they have raided McDonald's headquarters over a tax fraud investigation")
+(['Finance'], 'Update - EU rescue mission says approximately 20 corpses have been identified in Mediterranean after a boat capsized off the coast of #Libya')
+(['Politics'], 'Police have arrested nine people as several thousand protesters march in #Paris demanding the French government withdraw a labour bill')
+(['Sports'], 'Russia have included Maria #Sharapova in Olympic tennis team despite the player being suspended over positive test for banned drug meldonium')
+(['Sci&Tech'], 'Update - Italian coastguard says a boat carrying an unknown number of migrants has capsized off the coast of #Libya')
+(['Sports'], 'Update - An armed man on an extremist watch list has been arrested after barricading himself into an apartment in #Paris')
+(['Finance'], 'Italian coastguard says 80 people are thought to have drowned after a migrant boat capsized off the coast of Libya')
+
+20160527_00.csv
+(['Sports'], 'IOC: 23 athletes at the London 2012 Olympic Games from five sports &amp; of six nationalities returned adverse findings in doping re-tests')
+(['Crime'], 'Andrew Nay jailed for four years &amp; six months after crashing car into another vehicle in road rage chase that left 2 young sisters paralysed')
+(['Sports'], "Manchester United have confirmed Jose #Mourinho has been appointed as the club's manager #MUFC")
+
+20160527_12.csv
+(['Sports'], "England have beaten Australia 2-1 in their Euro 2016 warm-up friendly - 18-year-old Marcus Rashford now England's youngest debut goalscorer")
+(['Sci&Tech'], "Republic of Ireland's Euro 2016 warm-up friendly against Netherlands has finished 1-1 at the Aviva Stadium")
+(['Finance'], 'Northern Ireland have beaten Belarus 3-0 in their Euro 2016 warm-up friendly at Windsor Park')
+(['Sci&Tech'], 'Judge orders Johnny Depp to stay 100 yards away from estranged wife Amber Heard after she said he threw mobile phone at her during fight')
+(['Sci&Tech'], 'More than 100 scientists have called for the Olympic Games to be moved or postponed due to the #Zika virus outbreak')
+(['Politics'], "U.S. military official says coalition airstrikes have killed 70 Islamic State fighters including the group's leader in #Fallujah in Iraq")
+(['Sports'], 'Rafael Nadal has pulled out of the #FrenchOpen with a wrist injury')
+(['Sports'], "Andy Murray has beaten Croatia's Ivo Karlovic 6-1 6-4 7-6 (7/3) in the third round of the #FrenchOpen")
+
+20160528_00.csv
+(['Sports'], '#Tottenham Hotspur have reached an agreement with the Football Association to play their European fixtures at #Wembley next season')
+
+20160528_12.csv
+(['Sports'], 'Real Madrid have won the Champions League after beating Atletico Madrid 5-3 on penalties #UCLFinal')
+(['Sports'], '#Hull City have been promoted to the Premier League after beating Sheffield Wednesday 1-0 in the Championship play-off final at Wembley')
+(['Sports'], "Update - 29 children have been hospitalised after lightning struck a children's football match in Germany")
+(['Sports'], 'AFP: 35 people have been injured after lightning struck a football pitch in Germany - three people have serious injuries')
+(['Sci&Tech'], 'Update - Police say 11 people including 8 children injured by lightning in Parc Monceau in #Paris - 4 are in a life-threatening condition')
+(['Sci&Tech'], 'Update - AFP: 11 people including 10 children have been injured by lightning in Parc #Monceau in northwest #Paris')
+(['Sci&Tech'], 'Fire service in #Paris says eight children have been injured by lightning in Parc #Monceau in the northwest of the city')
+(['Finance'], 'Reuters: #Russian Olympic Committee says re-tests of samples from eight Russian athletes at 2012 Olympics have tested positive for doping')
+(['Finance'], 'Red Bull driver #DanielRicciardo will start on pole position for the #Monaco Grand Prix ahead of Nico Rosberg and Lewis Hamilton')
+(['Sports'], "Foreign Office has confirmed Monica O'Connor died and Jason Parnell is missing after a boat capsized off the coast of #KohSamui on Thursday")
+
+20160529_00.csv
+(['Sci&Tech'], 'UN refugee agency has said more than 700 migrants and refugees are feared dead in three shipwrecks in the Mediterranean Sea south of #Italy')
+(['Sci&Tech'], "Ukraine's emergency service: 16 people have died and one person is missing after a fire in an elderly people's home in #Litochky near Kiev")
+
+20160529_12.csv
+(['Politics', 'Finance', 'Sci&Tech'], 'England have beaten Wales 27-13 in a rugby union test match at Twickenham #ENGvWAL')
+(['Sports'], "Mercedes driver Lewis Hamilton has won the Monaco Grand Prix finishing ahead of Red Bull's Daniel Ricciardo and Force India's Sergio Perez")
+(['Sci&Tech'], 'Home Office: 18 Albanians and two British people are being questioned by Border Force after their boat was rescued in the English Channel')

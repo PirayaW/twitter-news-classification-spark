@@ -42,9 +42,10 @@ class realtimeStreaming:
         self.api = tweepy.API(auth)
 
     def fetch_realtime(self):
+        now_ = datetime.datetime.now()
         now = datetime.datetime.utcnow().replace(tzinfo=None)
         if self.verbose:
-            print('================== ' + str(now) + ' ==================')
+            print('================== ' + str(now_) + ' ==================')
         f, writer = None, None
         for acc in self.account_list:
             for status in tweepy.Cursor(self.api.user_timeline, id=acc).items(self.maxnumtweets):
@@ -55,7 +56,7 @@ class realtimeStreaming:
                 # print(tweet['text'])
                 if (now - self.timedelta) < tweetTime <= now:
                     if f is None:
-                        f = open(self.dest + now.strftime("%Y%m%d_%H-%M-%S-%f") + '.csv', 'w')
+                        f = open(self.dest + now_.strftime("%Y%m%d_%H-%M-%S-%f") + '.csv', 'w')
                         writer = csv.writer(f, delimiter='`', quotechar='|', quoting=csv.QUOTE_ALL)
                     text = tweet['text'].encode('ascii', 'replace')
                     row = [text, acc]

@@ -31,10 +31,10 @@ labels_num = [[0.0, 1.0], [0.0, 2.0], [0.0, 3.0], [0.0, 4.0], [0.0, 5.0],
               [1.0, 2.0], [1.0, 3.0], [1.0, 4.0], [1.0, 5.0],
               [2.0, 3.0], [2.0, 4.0], [2.0, 5.0],
               [3.0, 4.0], [3.0, 5.0], [4.0, 5.0]]
-data = sc.textFile("batch_data/20160521_12.csv")
+data = sc.textFile("batch_data/20160430_12.csv")
 data = data.mapPartitions(lambda x: csv.reader(x, delimiter='`', quotechar='|'))
 num_features = 300
-model_name = "Models/ModelforStreaming300_additional_ent"
+model_name = "Models/ModelforStreaming300_final"
 model = Word2Vec.load(model_name)
 index2word_set = set(model.index2word)
 f = lambda j: parsePoint(j, index2word_set, model, num_features)
