@@ -2,8 +2,10 @@
 The goal of this project is to classify news tweets into 6 categories: Politics, Finance, Sports, Sci&Tech, Entertainment, and Crime.
 
 CS249: Cloud Computing, Spring 2016
+
 Department of Computer Science
-University of California, Los Angeles  
+
+University of California, Los Angeles
 
 ## Team
 * Piraya Wongnimmarn
