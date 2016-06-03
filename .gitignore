@@ -1,14 +1,9 @@
 
 .idea/misc.xml
-
 .idea/modules.xml
-
 .idea/twitter-news-classification-spark.iml
-
 .idea/workspace.xml
-
 .idea/inspectionProfiles/profiles_settings.xml
-
 .idea/inspectionProfiles/Project_Default.xml
 
 config.properties
@@ -22,3 +17,5 @@ Output/testData-[0-9]*/_SUCCESS
 Output/unlabelledData-[0-9]*/_SUCCESS
 
 Models/GoogleNews-vectors-negative300.bin
+
+Demo/

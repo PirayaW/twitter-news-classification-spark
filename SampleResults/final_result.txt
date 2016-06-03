@@ -1,0 +1,138 @@
+Model: ModelforStreaming300_final
+Initial weights: [0.0]*300
+
+Test accuracies
+0.5669291338582677
+0.6535433070866141
+0.7322834645669292
+0.7401574803149606
+0.7874015748031497
+0.7795275590551181
+0.779527559055118
+0.8267716535433071
+0.8503937007874016
+0.8425196850393
+0.7952755905511811
+0.8031496062992126
+0.8031496062992126
+0.8110236220472441
+
+
+PersonPredict
+[ 15  51 184  47   0   5]
+The most fitted category for DanWetzel is Sports
+===================================
+[ 17  47 130 112   0   0]
+The most fitted category for DaveDiMartino is Sports
+===================================
+[147  54  59  36   0  11]
+The most fitted category for jaketapper is Politics
+===================================
+[ 17 186  49  51   0   3]
+The most fitted category for michaelsantoli is Finance
+===================================
+[  6  37  20 236   0   1]
+The most fitted category for verge is Sci&Tech
+===================================
+[ 29  47 180  43   0   7]
+The most fitted category for YahooNoise is Sports
+===================================
+[114  51 105  39   0   5]
+The most fitted category for maddow is Politics
+===================================
+[26 95 81 90  0 14]
+The most fitted category for SuzeOrmanShow is Finance
+===================================
+[ 32  74 133  32   0  35]
+The most fitted category for justin_fenton is Sports
+===================================
+[  8  22 237  30   0   7]
+The most fitted category for JamieHersch is Sports
+===================================
+[  6  67  36 193   0   0]
+The most fitted category for lifehacker is Sci&Tech
+===================================
+[  7  32  98 131   0  38]
+The most fitted category for chinpanchamia is Sci&Tech
+===================================
+[ 29  65  74 138   0   4]
+The most fitted category for SumitGouthaman is Sci&Tech
+===================================
+
+
+Data: 20160521_12.csv
+--------- CONFUSION MATRIX ------------
+['Politics', 'Finance', 'Sports', 'Sci&Tech', 'Entertainment', 'Crime', 'Other']
+[[25  1  0  1  0  0  0]
+ [ 1 19  2  7  0  0  0]
+ [ 1  1 41  0  0  0  0]
+ [ 0  1  0 15  0  0  0]
+ [ 0  1  1  2  0  1  0]
+ [ 0  1  2  3  0  3  0]]
+ACCURACY 0.811023622047
+
+Data: 20160430_12.csv
+['Politics', 'Finance', 'Sports', 'Sci&Tech', 'Entertainment', 'Crime', 'Other']
+[[1816   50   74   64    0    5    0]
+ [ 109 1518   88  290    0    1    0]
+ [  24   30 1884   51    0   17    0]
+ [  44  354  115 1484    2   12    0]
+ [ 189  248 1037  480   44   28    0]
+ [ 246  175  190  246    3 1158    0]]
+ACCURACY 0.658666666667
+
+
+Streaming log
+['20160430_12.csv', '20160501_00.csv', '20160501_12.csv', '20160502_00.csv', '20160502_12.csv', '20160503_00.csv', '20160503_12.csv', '20160504_00.csv', '20160504_12.csv', '20160505_00.csv', '20160505_12.csv', '20160506_00.csv', '20160506_12.csv', '20160507_00.csv', '20160507_12.csv', '20160515_00.csv', '20160515_12.csv', '20160516_00.csv', '20160516_12.csv', '20160517_00.csv', '20160517_12.csv', '20160518_00.csv', '20160518_12.csv', '20160519_00.csv', '20160519_12.csv', '20160520_00.csv', '20160520_12.csv', '20160521_00.csv', '20160521_12.csv']
+Deleted existing files
+Do you want to update the model? (y/n) :
+y
+Do you want to stream batch unlabelled data? (y/n) :
+n
+Do you want to stream realtime tweets? (y/n) :
+n
+Copied Training file: 20160430_12.csv
+Copied Training file: 20160501_00.csv
+Copied Training file: 20160501_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160502_00.csv
+Copied Training file: 20160502_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160503_00.csv
+Copied Training file: 20160503_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160504_00.csv
+Copied Training file: 20160504_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160505_00.csv
+Copied Training file: 20160505_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160506_00.csv
+Copied Training file: 20160506_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160507_00.csv
+Copied Training file: 20160507_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160515_00.csv
+Copied Training file: 20160515_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160516_00.csv
+Copied Training file: 20160516_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160517_00.csv
+Copied Training file: 20160517_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160518_00.csv
+Copied Training file: 20160518_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160519_00.csv
+Copied Training file: 20160519_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160520_00.csv
+Copied Training file: 20160520_12.csv
+Copied Testing file: 20160521_12.csv
+Copied Training file: 20160521_00.csv
+Copied Testing file: 20160521_12.csv
+sending save signal
+
+Process finished with exit code 0
