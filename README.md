@@ -3,14 +3,15 @@ The goal of this project is to classify news tweets into 6 categories: Politics,
 
 CS249: Cloud Computing, Spring 2016
 Department of Computer Science
-University of California, Los Angeles
+University of California, Los Angeles  
+
 ## Team
 * Piraya Wongnimmarn
 * Punit Shetty
 
 ## Configuration
 * Install Spark on your machine. (http://spark.apache.org/downloads.html)
-* Configure you Spark path (SPARK_HOME) in config.properties file. Place this file in the root folder.
+* Configure your Spark path (SPARK_HOME) in config.properties file. Place this file in the root folder.
 ```
 [Twitter]
 consumer_token =
